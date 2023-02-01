@@ -1,0 +1,42 @@
+# Caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+node_modules/
+venv/
+.venv/
+
+# Logs e dados
+logs/
+*.log
+
+# Dados
+data/raw/*.csv
+data/raw/*.xlsx
+data/processed/*.csv
+data/processed/*.parquet
+
+# Secrets
+.env
+*.key
+*.pem
+.git-credentials
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Build
+dist/
+build/
+*.egg-info/
