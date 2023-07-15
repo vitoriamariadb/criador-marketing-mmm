@@ -1,0 +1,16 @@
+.git
+.gitignore
+__pycache__
+*.pyc
+*.pyo
+*.egg-info
+.venv
+venv
+.vscode
+.idea
+*.swp
+.DS_Store
+notebooks/
+docs/
+tests/
+.ipynb_checkpoints
