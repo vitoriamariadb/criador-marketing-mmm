@@ -206,3 +206,4 @@ class SaturationTransformer:
 
 
 # "Metade do dinheiro que gasto em publicidade e desperdicado; o problema e que nao sei qual metade." - John Wanamaker
+
