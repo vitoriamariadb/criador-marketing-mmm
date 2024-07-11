@@ -297,3 +297,4 @@ class MMMCharts:
 
 
 # "Um bom grafico vale mais que mil tabelas." - Edward Tufte (adaptado)
+
