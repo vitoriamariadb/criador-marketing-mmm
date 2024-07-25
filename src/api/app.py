@@ -244,3 +244,4 @@ if __name__ == "__main__":
 
 
 # "Uma interface e um contrato entre quem serve e quem consome." - Robert C. Martin
+
