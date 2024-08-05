@@ -56,3 +56,4 @@ LOG_RETENTION: str = "30 days"
 LOG_FORMAT: str = "{time:YYYY-MM-DD HH:mm:ss} | {level} | {module}:{function}:{line} | {message}"
 
 # "A simplicidade e a sofisticacao suprema." - Leonardo da Vinci
+
