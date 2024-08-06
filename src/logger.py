@@ -32,3 +32,4 @@ def setup_logger() -> None:
 setup_logger()
 
 # "Medir o que e mensuravel, tornar mensuravel o que nao e." - Galileu Galilei
+
