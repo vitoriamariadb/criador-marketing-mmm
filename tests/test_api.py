@@ -216,3 +216,4 @@ class TestMetricsEndpoint:
 
 
 # "Confie, mas verifique." - Proverbio russo
+
