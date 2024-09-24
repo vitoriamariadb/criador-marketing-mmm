@@ -115,4 +115,3 @@ class DataLoader:
 
 
 # "O que pode ser medido pode ser melhorado." - Peter Drucker
-
