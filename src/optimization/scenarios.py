@@ -250,4 +250,3 @@ class ScenarioPlanner:
 
 
 # "Planeje o trabalho e trabalhe o plano." - Napoleon Hill
-
