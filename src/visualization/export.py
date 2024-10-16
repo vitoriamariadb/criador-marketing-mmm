@@ -189,4 +189,3 @@ class ResultExporter:
 
 
 # "O que e medido melhora. O que e medido e reportado melhora exponencialmente." - Karl Pearson
-
