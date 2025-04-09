@@ -62,3 +62,4 @@ def media_channels() -> list:
         "tv_spend", "radio_spend", "digital_spend",
         "social_spend", "search_spend", "print_spend",
     ]
+
