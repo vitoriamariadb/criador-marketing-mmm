@@ -184,4 +184,3 @@ class FeatureEngineer:
 
 
 # "Tortura os dados por tempo suficiente e eles confessarao qualquer coisa." - Ronald Coase
-
