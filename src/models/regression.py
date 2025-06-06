@@ -167,4 +167,3 @@ class MMMRegressor:
 
 
 # "Todos os modelos estao errados, mas alguns sao uteis." - George Box
-
