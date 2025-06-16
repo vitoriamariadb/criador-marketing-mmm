@@ -239,4 +239,3 @@ def compare_models(
 
 
 # "A perfeicao nao e atingida quando nao ha mais nada a adicionar, mas quando nao ha mais nada a remover." - Antoine de Saint-Exupery
-
