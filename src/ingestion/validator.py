@@ -145,4 +145,3 @@ class DataValidator:
 
 
 # "Sem dados, voce e apenas mais uma pessoa com uma opiniao." - W. Edwards Deming
-
