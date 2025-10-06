@@ -170,3 +170,4 @@ class AdstockTransformer:
 
 
 # "O efeito residual da publicidade e como o eco numa montanha." - David Ogilvy
+
