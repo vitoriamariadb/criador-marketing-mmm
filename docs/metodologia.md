@@ -1,17 +1,17 @@
 # Metodologia de Marketing Mix Modeling (MMM)
 
-## 1. Visao Geral
+## 1. Visão Geral
 
-Marketing Mix Modeling (MMM) e uma tecnica estatistica que quantifica o impacto de
-diferentes canais de marketing na receita ou outra variavel de negocio. Diferente de
-modelos de atribuicao digital (last-click, multi-touch), o MMM funciona com dados
-agregados e consegue capturar efeitos offline (TV, radio, midia impressa).
+Marketing Mix Modeling (MMM) é uma técnica estatística que quantifica o impacto de
+diferentes canais de marketing na receita ou outra variável de negócio. Diferente de
+modelos de atribuição digital (last-click, multi-touch), o MMM funciona com dados
+agregados e consegue capturar efeitos offline (TV, rádio, mídia impressa).
 
-## 2. Fundamentacao Teorica
+## 2. Fundamentação Teórica
 
 ### 2.1 Modelo Base
 
-O modelo base e uma regressao linear multipla:
+O modelo base é uma regressão linear múltipla:
 
 ```
 Revenue = b0 + b1*X1 + b2*X2 + ... + bn*Xn + e
@@ -19,109 +19,109 @@ Revenue = b0 + b1*X1 + b2*X2 + ... + bn*Xn + e
 
 Onde:
 - `b0`: intercepto (receita base sem marketing)
-- `Xi`: variaveis de investimento em midia ou controle
+- `Xi`: variáveis de investimento em mídia ou controle
 - `bi`: coeficientes que representam o efeito marginal
-- `e`: erro aleatorio
+- `e`: erro aleatório
 
-### 2.2 Transformacao Adstock
+### 2.2 Transformação Adstock
 
-A publicidade tem efeito residual - o impacto de um anuncio nao desaparece imediatamente.
+A publicidade tem efeito residual - o impacto de um anúncio não desaparece imediatamente.
 O adstock modela esse carry-over:
 
 ```
 Adstock_t = X_t + decay * Adstock_{t-1}
 ```
 
-Parametros:
+Parâmetros:
 - **decay_rate**: controla a velocidade do decaimento (0 = sem efeito residual, 1 = efeito permanente)
-- **max_lag**: numero maximo de periodos de carry-over
+- **max_lag**: número máximo de períodos de carry-over
 
 Tipos de adstock implementados:
-1. **Geometrico**: decaimento exponencial simples
+1. **Geométrico**: decaimento exponencial simples
 2. **Weibull**: permite pico atrasado (delayed peak effect)
 
-### 2.3 Curvas de Saturacao
+### 2.3 Curvas de Saturação
 
-Retornos decrescentes sao modelados por curvas de saturacao. Apos certo nivel de investimento,
+Retornos decrescentes são modelados por curvas de saturação. Após certo nível de investimento,
 o retorno marginal diminui.
 
-Funcoes implementadas:
-1. **Exponencial**: `y = 1 - exp(-lambda * x)` - saturacao monotona
-2. **Hill**: `y = x^a / (x^a + g^a)` - funcao sigmoide flexivel
-3. **Logistica**: curva S classica com ponto de inflexao
-4. **Potencia**: `y = x^a` onde a < 1 produz retornos decrescentes
+Funções implementadas:
+1. **Exponencial**: `y = 1 - exp(-lambda * x)` - saturação monótona
+2. **Hill**: `y = x^a / (x^a + g^a)` - função sigmoide flexível
+3. **Logística**: curva S clássica com ponto de inflexão
+4. **Potência**: `y = x^a` onde a < 1 produz retornos decrescentes
 
-### 2.4 Regularizacao
+### 2.4 Regularização
 
 Modelos regularizados previnem overfitting:
 
-- **Ridge (L2)**: penaliza a soma dos quadrados dos coeficientes. Todos permanecem nao-zero.
-- **Lasso (L1)**: penaliza a soma dos valores absolutos. Promove sparsidade (alguns coeficientes vao a zero).
-- **ElasticNet**: combinacao de L1 e L2. Parametro `l1_ratio` controla o mix.
+- **Ridge (L2)**: penaliza a soma dos quadrados dos coeficientes. Todos permanecem não-zero.
+- **Lasso (L1)**: penaliza a soma dos valores absolutos. Promove sparsidade (alguns coeficientes vão a zero).
+- **ElasticNet**: combinação de L1 e L2. Parâmetro `l1_ratio` controla o mix.
 
 ## 3. Pipeline de Modelagem
 
-### 3.1 Ingestao de Dados
+### 3.1 Ingestão de Dados
 
-- Dados semanais ou diarios de investimento por canal
-- Variavel dependente (receita, conversoes, etc.)
-- Variaveis de controle (sazonalidade, preco, competidores)
+- Dados semanais ou diários de investimento por canal
+- Variável dependente (receita, conversões, etc.)
+- Variáveis de controle (sazonalidade, preço, competidores)
 
 ### 3.2 Feature Engineering
 
-1. Features temporais (semana, mes, sazonalidade ciclica)
-2. Transformacao adstock nos canais de midia
-3. Transformacao de saturacao
-4. Lags e medias moveis
+1. Features temporais (semana, mês, sazonalidade cíclica)
+2. Transformação adstock nos canais de mídia
+3. Transformação de saturação
+4. Lags e médias móveis
 5. Features de share of spend
-6. Interacoes entre canais (opcional)
+6. Interações entre canais (opcional)
 
-### 3.3 Selecao e Treinamento
+### 3.3 Seleção e Treinamento
 
-1. Comparacao entre Ridge, Lasso e ElasticNet
-2. Validacao cruzada temporal (TimeSeriesSplit)
-3. Grid search para hiperparametros
-4. Avaliacao: R2, RMSE, MAE, MAPE
+1. Comparação entre Ridge, Lasso e ElasticNet
+2. Validação cruzada temporal (TimeSeriesSplit)
+3. Grid search para hiperparâmetros
+4. Avaliação: R2, RMSE, MAE, MAPE
 
-### 3.4 Interpretacao
+### 3.4 Interpretação
 
 1. Coeficientes do modelo = efeito marginal de cada canal
-2. Decomposicao de contribuicao = quanto cada canal contribuiu para a receita
-3. ROI/ROAS por canal = eficiencia do investimento
-4. Feature importance por permutacao
+2. Decomposição de contribuição = quanto cada canal contribuiu para a receita
+3. ROI/ROAS por canal = eficiência do investimento
+4. Feature importance por permutação
 
-## 4. Otimizacao de Budget
+## 4. Otimização de Budget
 
-A otimizacao busca a alocacao que maximiza a receita prevista, sujeita a:
-- Orcamento total fixo
-- Limites minimos e maximos por canal
-- Curvas de saturacao (retornos decrescentes)
+A otimização busca a alocação que maximiza a receita prevista, sujeita a:
+- Orçamento total fixo
+- Limites mínimos e máximos por canal
+- Curvas de saturação (retornos decrescentes)
 
-Metodo: scipy.optimize.minimize com restricoes (SLSQP).
+Método: scipy.optimize.minimize com restrições (SLSQP).
 
-## 5. Planejamento de Cenarios
+## 5. Planejamento de Cenários
 
-Tipos de cenarios suportados:
-1. **Proporcional**: aumento/reducao uniforme em todos os canais
-2. **Foco em canal**: aumento especifico em um canal
-3. **Realocacao**: transferencia de budget entre canais
-4. **Analise de sensibilidade**: impacto de variacoes em um canal
+Tipos de cenários suportados:
+1. **Proporcional**: aumento/redução uniforme em todos os canais
+2. **Foco em canal**: aumento específico em um canal
+3. **Realocação**: transferência de budget entre canais
+4. **Análise de sensibilidade**: impacto de variações em um canal
 
-## 6. Limitacoes do MMM
+## 6. Limitações do MMM
 
-- Requer dados historicos suficientes (idealmente 2+ anos)
-- Assume relacao linear (ou linearizada via transformacoes)
-- Nao captura interacoes complexas entre canais
-- Sensivel a multicolinearidade entre canais
-- Resultados dependem da qualidade das transformacoes (adstock, saturacao)
+- Requer dados históricos suficientes (idealmente 2+ anos)
+- Assume relação linear (ou linearizada via transformações)
+- Não captura interações complexas entre canais
+- Sensível a multicolinearidade entre canais
+- Resultados dependem da qualidade das transformações (adstock, saturação)
 
-## 7. Referencias
+## 7. Referências
 
 - Jin, Y., et al. (2017). "Bayesian Methods for Media Mix Modeling with Carryover and Shape Effects"
 - Chan, D., & Perry, M. (2017). "Challenges and Opportunities in Media Mix Modeling"
 - Google (2017). "Media Mix Model - Bayesian Regression"
-- Robyn by Meta (2022). Documentacao tecnica de referencia
+- Robyn by Meta (2022). Documentação técnica de referência
 
 ---
 
-*"A estatistica e a gramatica da ciencia." - Karl Pearson*
+*"A estatística é a gramática da ciência." - Karl Pearson*
